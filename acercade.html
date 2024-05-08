@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca de nosotros</title>
+    <link rel="icon" href="img/casa.png" type="image/png">
+
+    <style>
+        body {
+            background-color: #152238; /* Fondo azul oscuro */
+            color: white; /* Texto blanco */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px; /* Espaciado para centrar el contenido verticalmente */
+            margin: 0; /* Eliminar márgenes predeterminados */
+            overflow: hidden; /* Ocultar el desbordamiento */
+            position: relative; /* Añadido para posicionar el canvas */
+        }
+
+        h1 {
+            font-family: "Times New Roman", Times, serif; /* Letra elegante */
+            font-size: 36px; /* Tamaño del título */
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7); /* Efecto de sombra */
+            margin: 0; /* Eliminar márgenes predeterminados */
+            padding-top: 20px; /* Espaciado superior */
+        }
+
+        .image-container {
+            display: flex; /* Mostrar las imágenes en línea */
+            justify-content: center; /* Centrar horizontalmente */
+            background-color: #152238; /* Fondo azul oscuro */
+            padding: 20px 0; /* Espaciado interno superior e inferior */
+        }
+
+        img {
+            max-width: 17%; /* Máximo ancho de las imágenes */
+            height: auto; /* Altura automática para mantener la proporción */
+            margin: 0 10px; /* Margen horizontal entre las imágenes */
+            transition: transform 0.3s ease; /* Efecto de transición al pasar el mouse */
+            animation: zoomAnimation 1s ease-in-out; /* Animación de zoom al cargar la página */
+        }
+
+        .image-container img:hover {
+            transform: scale(1.1); /* Efecto de aumento al pasar el mouse */
+        }
+
+        .button-link {
+            position: absolute; /* Posición absoluta para superponer al contenedor */
+            top: 10px; /* Espacio superior */
+            left: 10px; /* Espacio izquierdo */
+        }
+
+        .button-link img {
+            width: 200px; /* Ancho de la imagen botón */
+            height: auto; /* Altura automática */
+            cursor: pointer; /* Cambiar el cursor al pasar el mouse */
+            transition: transform 0.3s ease; /* Efecto de transición al pasar el mouse */
+        }
+
+        .button-link img:hover {
+            transform: scale(1.1); /* Efecto de aumento al pasar el mouse */
+        }
+
+        #fireworksCanvas {
+            position: absolute; /* Posición absoluta */
+            top: 0; /* Ajuste para que el canvas esté en la parte superior */
+            left: 50%; /* Centrar horizontalmente */
+            transform: translateX(-50%); /* Centrar horizontalmente */
+            pointer-events: none; /* Para que el canvas no intercepte eventos de ratón */
+        }
+
+        @keyframes zoomAnimation {
+            from {
+                transform: scale(0.5); /* Zoom inicial */
+            }
+            to {
+                transform: scale(1); /* Zoom final */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="button-link">
+        <a href="index.html">
+            <img src="img/casa.png" alt="Botón">
+        </a>
+    </div>
+
+    <h1>Creado por: <br>
+        Grupo 2
+    </h1>
+    <div class="image-container">
+        <img src="img/Edy2.jpg" alt="Imagen 1">
+        <img src="img/Junior.jpg" alt="Imagen 2">
+        <img src="img/Emilio.jpg" alt="Imagen 3">
+        <img src="img/Erick.jpg" alt="Imagen 4">
+    </div>
+
+    <!-- Audio que se reproduce automáticamente -->
+    <audio controls autoplay>
+        <source src="music/Ooh Ahh My Life Be Like feat tobyMac.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <!-- Canvas para los juegos artificiales -->
+    <canvas id="fireworksCanvas"></canvas>
+
+    <script>
+        // Función para crear el efecto de juegos artificiales
+        function createFireworks() {
+            const canvas = document.getElementById("fireworksCanvas");
+            const ctx = canvas.getContext("2d");
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            function random(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            function Particle() {
+                this.x = random(0, canvas.width); // Partículas se generan en toda la anchura del canvas
+                this.y = 0; // Partículas se generan desde el borde superior del canvas
+                this.vx = random(-5, 5);
+                this.vy = random(1, 5); // Velocidad hacia abajo
+                this.alpha = 1;
+                this.color = `hsla(${random(0, 360)}, 100%, 50%, ${this.alpha})`;
+                this.gravity = 0.05;
+                this.fade = 0.02;
+                this.radius = random(2, 4);
+            }
+
+            Particle.prototype.update = function () {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += this.gravity;
+                this.alpha -= this.fade;
+            };
+
+            Particle.prototype.draw = function () {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            };
+
+            const particles = [];
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                particles.forEach((particle, index) => {
+                    particle.update();
+                    particle.draw();
+
+                    if (particle.alpha <= 0) {
+                        particles.splice(index, 1);
+                    }
+                });
+
+                if (Math.random() < 0.2) {
+                    particles.push(new Particle());
+                }
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        }
+
+        createFireworks();
+    </script>
+</body>
+</html>

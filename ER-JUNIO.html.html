@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESTADO DE RESULTADOS JUNIO</title>
+    <link rel="icon" href="img/casa.png" type="image/png">
+
+    <style>
+        body {
+            background-color: #000000; /* Fondo azul oscuro */
+            color: white; /* Texto blanco */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px; /* Espaciado para centrar el contenido verticalmente */
+            position: relative; /* Agregado para que el botón se posicione correctamente */
+        }
+
+        h1 {
+            color: white; /* Texto blanco */
+        }
+
+        .boton-izquierda {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #008cff; /* Fondo azul */
+            color: rgb(0, 0, 0); /* Texto blanco */
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute; /* Posicionamiento absoluto */
+            top: 20px; /* Distancia desde la parte superior */
+            left: 20px; /* Distancia desde el lado izquierdo */
+        }
+
+        .boton-izquierda:hover {
+            background-color: #214279; /* Cambio de color al pasar el mouse */
+        }
+
+        .boton-derecha {
+            position: absolute; /* Posicionamiento absoluto */
+            top: 20px; /* Distancia desde la parte superior */
+            right: 20px; /* Distancia desde el lado derecho */
+            z-index: 999; /* Colocar por encima de otros elementos */
+            animation: bounceAnimation 0.5s infinite alternate; /* Animación de salto */
+        }
+
+        .boton-derecha img {
+            width: 50px; /* Ancho de la imagen del botón */
+            height: 50px; /* Alto de la imagen del botón */
+            cursor: pointer;
+        }
+
+        @keyframes bounceAnimation {
+            0% {
+                transform: translateY(0); /* Sin traslación en Y */
+            }
+            100% {
+                transform: translateY(-5px); /* Traslación hacia arriba */
+            }
+        }
+
+        /* Estilos para el elemento embed */
+        embed {
+            display: block;
+            margin: 0 auto; /* Centrar horizontalmente */
+            width: 80%; /* Ancho del documento PDF */
+            height: 500px; /* Altura del documento PDF */
+        }
+    </style>
+</head>
+<body>
+    <h1>ESTADO DE RESULTADOS JUNIO</h1>
+    <a href="index.html" class="boton-izquierda">Volver a menú principal</a>
+    
+    <!-- Embed del documento PDF -->
+    <embed src="archivos/PRUEBA 2.pdf" type="application/pdf" />
+    
+    <!-- Imagen botón -->
+    <div class="boton-derecha">
+        <a href="acercade.html">
+            <img src="img/informacion.png" alt="Botón">
+        </a>
+    </div>
+</body>
+</html>

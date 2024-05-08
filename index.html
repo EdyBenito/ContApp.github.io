@@ -1,0 +1,179 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContApp</title>
+    <link rel="icon" href="img/calculadora.png" type="image/png">
+
+    <style>
+        body {
+            background-color: #152238; /* Fondo azul oscuro */
+            color: white; /* Texto blanco */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: white; /* Texto blanco */
+        }
+
+        h2 {
+            color: white; /* Texto blanco */
+            display: none; /* Ocultar inicialmente */
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 20px;
+            background-color: #1f3a6d; /* Fondo azul */
+            color: white; /* Texto blanco */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none; /* Ocultar inicialmente */
+        }
+
+        a {
+            display: none; /* Ocultar inicialmente */
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #7f1010; /* Fondo azul */
+            color: white; /* Texto blanco */
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        a:hover {
+            background-color: #214279; /* Cambio de color al pasar el mouse */
+        }
+
+        .generando {
+            display: none; /* Ocultar inicialmente */
+            position: fixed; /* Posición fija para que aparezca en el centro de la pantalla */
+            top: 50%; /* Centrar verticalmente */
+            left: 50%; /* Centrar horizontalmente */
+            transform: translate(-50%, -50%); /* Centrar completamente */
+            background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+            color: white; /* Texto blanco */
+            padding: 20px;
+            border-radius: 5px;
+            z-index: 9999; /* Asegura que el rótulo esté encima de otros elementos */
+        }
+
+        .login-container {
+            margin-top: 20px; /* Espacio entre el h1, el botón y el h2 */
+        }
+
+        .carousel-container {
+            width: 100%;
+            margin-top: 0; /* Eliminar espacio superior */
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .carousel {
+            width: 100%;
+            display: flex;
+            transition: transform 1s ease-in-out;
+        }
+
+        .carousel img {
+            width: 100%; /* Tamaño de la imagen */
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <div class="carousel">
+            <img src="img/a.png" alt="Imagen 1">
+            <img src="img/b.png" alt="Imagen 2">
+            <img src="img/e.png" alt="Imagen 3">
+            <img src="img/d.png" alt="Imagen 4">
+            <img src="img/c.png" alt="Imagen 5">
+        </div>
+    </div>
+
+    <h1>Grupo 2 Sección C</h1>
+    <div class="login-container">
+        <input type="file" accept=".xlsx" onchange="mostrarOpciones()">
+    </div>
+
+    <h2>Ejercicio 5</h2>
+    <select id="reporte-select">
+        <option value="opcion1">DMG y BS Junio</option>
+        <option value="opcion2">ER Junio</option>
+        <option value="opcion3">BG Junio</option>
+        <option value="opcion4">DMG y BS Julio</option>
+        <option value="opcion5">ER Julio</option>
+        <option value="opcion6">BG Julio</option>
+    </select>
+
+    <a href="#" onclick="generando()">Crear Excel</a>
+
+    <div class="generando" id="generando">Convirtiendo documento, por favor espere...</div>
+
+    <script>
+        // Función para cambiar de imagen en el carrusel
+        let currentIndex = 0;
+        const carouselImages = document.querySelectorAll('.carousel img');
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % carouselImages.length;
+            const newPosition = -currentIndex * 100 + '%';
+            document.querySelector('.carousel').style.transform = `translateX(${newPosition})`;
+        }, 10000);
+
+        function mostrarOpciones() {
+            // Mostrar rótulo de "Generando"
+            document.querySelector('.generando').style.display = "block";
+
+            // Ocultar botón de carga de archivo
+            document.querySelector('.login-container').style.display = "none";
+
+            // Simular una espera de 2 segundos antes de mostrar las opciones adicionales
+            setTimeout(function() {
+                // Mostrar opciones adicionales
+                document.querySelector('h2').style.display = "block";
+                document.querySelector('select').style.display = "block";
+                document.querySelector('a').style.display = "inline-block";
+
+                // Ocultar rótulo de "Generando"
+                document.querySelector('.generando').style.display = "none";
+            }, 2000);
+        }
+
+        function generando() {
+            // Mostrar mensaje de "Generando"
+            document.getElementById("generando").style.display = "block";
+
+            // Obtener el valor seleccionado del select
+            var selectedOption = document.getElementById("reporte-select").value;
+
+            // Establecer un temporizador para ocultar el mensaje después de 2 segundos
+            setTimeout(function() {
+                document.getElementById("generando").style.display = "none";
+            }, 2000);
+
+            // Simular una espera de 2 segundos antes de redirigir
+            setTimeout(function() {
+                // Redirigir al documento según el valor seleccionado
+                if (selectedOption === "opcion1") {
+                    window.location.href = "IDMG-BS-JUNIO.html";
+                } else if (selectedOption === "opcion2") {
+                    window.location.href = "IER-JUNIO.html.html";
+                } else if (selectedOption === "opcion3") {
+                    window.location.href = "IBG JUNIO.html";
+                } else{
+                    // Cualquier otro caso
+                    window.location.href = "default.html";
+                }
+            }, 4000);
+        }
+    </script>
+</body>
+</html>

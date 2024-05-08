@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libro Mayor</title>
+    <link rel="icon" href="img/casa.png" type="image/png">
+
+    <style>
+        body {
+            background-color: rgb(255, 255, 255);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; /* Cambiar a diseño de columna */
+            align-items: center;
+            height: 100vh;
+            overflow: auto; /* Permitir desplazamiento vertical */
+            position: relative; /* Establecer posición relativa */
+        }
+
+        h1 {
+            color: rgba(0, 0, 0, 0.927);
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            margin: auto;
+            margin-bottom: 20px; /* Espacio entre las imágenes */
+        }
+
+        .icono-enlace {
+            position: absolute; /* Establecer posición absoluta */
+            top: 20px; /* Ajustar distancia desde arriba */
+            right: 20px; /* Ajustar distancia desde la derecha */
+            cursor: pointer;
+            width: 40px; /* Ancho de la imagen */
+            height: 40px; /* Alto de la imagen */
+            animation: bounceAnimation 0.5s infinite alternate; /* Animación de salto */
+        }
+
+        @keyframes bounceAnimation {
+            0% {
+                transform: translateY(0); /* Sin traslación en Y */
+            }
+            100% {
+                transform: translateY(-5px); /* Traslación hacia arriba */
+            }
+        }
+
+        /* Estilos para el botón en el lado superior izquierdo */
+        .boton-izquierda {
+            position: absolute; /* Establecer posición absoluta */
+            top: 20px; /* Ajustar distancia desde arriba */
+            left: 20px; /* Ajustar distancia desde la izquierda */
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: #1f3a6d; /* Fondo azul */
+            color: white; /* Texto blanco */
+            text-decoration: none;
+            border-radius: 5px;
+            z-index: 999; /* Asegurar que esté por encima de otras capas */
+        }
+
+        .boton-izquierda:hover {
+            background-color: #214279; /* Cambio de color al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+    <!-- Botón en el lado superior izquierdo -->
+    <a href="index.html" class="boton-izquierda">Volver </a>
+
+    <h1>DMG Y BS JUNIO</h1>
+    <img src="img/DMG Y BS JUNIO 1.png" alt="Imagen 1">
+    
+   <!-- <img src="img/Emilio.jpg" alt="Imagen 2">
+    <img src="img/Erick.jpg" alt="Imagen 3">
+    <img src="img/Junior.jpg" alt="Imagen 4">
+    <img src="img/Edy2.jpg" alt="Imagen 5"> -->
+    
+    <!-- <a href="DMG-BS-JUNIO.html" id="enlace"><img class="icono-enlace" src="img/pdf.png" alt="Enlace"></a>-->
+    <a href="DMG-BS-JUNIO.html" id="enlace"><img class="icono-enlace" src="img/pdf.png" alt="Enlace"></a>
+
+    <script>
+        document.getElementById('enlace').addEventListener('click', function(event) {
+            // Evitar el comportamiento predeterminado del enlace
+            event.preventDefault();
+
+            // Mostrar mensaje de "Generando"
+            var generandoMensaje = document.createElement("div");
+            generandoMensaje.textContent = "Generando PDF, por favor espere...";
+            generandoMensaje.style.position = "fixed";
+            generandoMensaje.style.top = "50%";
+            generandoMensaje.style.left = "50%";
+            generandoMensaje.style.transform = "translate(-50%, -50%)";
+            generandoMensaje.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+            generandoMensaje.style.color = "white";
+            generandoMensaje.style.padding = "20px";
+            generandoMensaje.style.borderRadius = "5px";
+            generandoMensaje.style.zIndex = "9999";
+            document.body.appendChild(generandoMensaje);
+
+            // Retrasar la redirección después de 2 segundos
+            setTimeout(function() {
+                window.location.href = "DMG-BS-JUNIO.html";
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
